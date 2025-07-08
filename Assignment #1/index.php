@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Library</title>
     <style>
+        /* styling */
         .title {
             text-align: center;
             color: darkblue;
@@ -19,8 +20,9 @@
 <body>
     <h1 class="title">Pokémon Battle Results</h1>
     <?php 
+        // Connect to the database
         require('connect.php');
-        
+        // create query to join the pokemon and combats tables
         $sql_join_query = " SELECT p.`COL 2` AS PokemonName, p.`COL 3` AS PrimaryType, p.`COL 12` AS Legendary, COUNT(c.`COL 3`) AS Wins
             FROM pokemon AS p
             JOIN combats AS c ON p.`COL 1` = c.`COL 3`
@@ -28,8 +30,11 @@
         $datas = mysqli_query($connect, $sql_join_query);
     ?>
     <?php
+        // Display the results
         $num = 0;
+        // title
         echo '<h2>Pokémon - Primary Type - Legendary - Wins</h2>';
+        // while loop to iterate through the data
         while($data = mysqli_fetch_assoc($datas)) {
                 $num++;
                 if ($num % 2 == 0) {
